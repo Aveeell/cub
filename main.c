@@ -4,7 +4,7 @@
 
 void error(char **map, int i, int j)
 {
-	if(map && i && j)
+	if(map)
 		printf("[%d][%d] - |%s|\n", i, j, map[i]);
 	printf("error\n");
 	exit(0);
@@ -91,7 +91,10 @@ int main(int argc, char **argv)
 	{
 		map = get_map(argv[1]);
 		if(!map)
+		{
+			printf("here\n");
 			error(0,0,0);
+		}
 		// else
 		// 	for(int i = 0; map[i]; i++)
 		// 		printf("%s\n", map[i]);

@@ -4,19 +4,23 @@ static int check_spaces_above(char **map, int i, int j)
 {
 	if(i > 6)
 	{
-		if(map[i][j] == ' ')
+		while(map[i][j])
+		{
+		if(map[i][j] == ' ' && (ft_strlen(map[i]) == ft_strlen(map[i - 1])))
 			if(map[i - 1][j] != ' ' && map[i - 1][j] != '1')
 			{
-				printf("4\n");
+				printf("4.1\n");
 				error(map, i, j);
 			}
 		if(map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || 
 			map[i][j] == 'W' || map[i][j] == 'E')
 			if(map[i - 1][j] == ' ')
 				{
-				printf("4\n");
+				printf("4.2\n");
 				error(map, i, j);
 			}
+			j++;
+		}
 	}
 	return 0;
 }
@@ -76,6 +80,7 @@ int check_wall(char **map)
 		j = 0;
 		if(i == 6 || !map[i + 1])
 		{
+			// printf("\n|%s|", map[i]);
 			check_wall_and_space(map, i);
 			while(map[i][j])
 			{
