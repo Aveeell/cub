@@ -7,6 +7,7 @@ RM = rm -f
 SRCS =	main.c \
 		check_wall.c \
 		ft_split.c \
+		ft_strtrim.c \
 		utils.c \
 		gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \

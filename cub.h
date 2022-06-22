@@ -14,6 +14,7 @@ int	ft_strncmp(const char *s1, const char *s2, int n);
 char	*ft_substr(char const *s, int start, int len);
 int check_wall(char **map);
 void error(char **map, int i, int j, char *where);
+char	*ft_strtrim(char const *s1, char const *set);
 
 
 #endif
