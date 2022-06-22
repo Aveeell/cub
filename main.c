@@ -6,7 +6,7 @@
 /*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:08:19 by jerrok            #+#    #+#             */
-/*   Updated: 2022/06/22 14:48:56 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/06/22 17:28:36 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,11 @@ void error(char **map, int i, int j, char *where)
 	exit(0);
 }
 
-// char *gnl(int fd)
-// {
-// 	int rd;
-// 	int i;
-// 	char c;
-// 	char *str;
-//
-// 	i = 0;
-// 	str = malloc(10000);
-// 	while((rd = read(fd, &c, 1)) > 0)
-// 	{
-// 		str[i] = c;
-// 		i++;
-// 		if(c == '\n')
-// 			break;
-// 	}
-// 	if((!str[i-1] && !rd) || rd == -1)
-// 	{
-// 		free(str);
-// 		return 0;
-// 	}
-// 	str[i] = 0;
-// 	return str;
-// }
-
 char **get_map(char *map_file)
 {
 	char **map;
 	char *read;
 	char *line;
-	int i;
 	int fd;
 
 	fd = open(map_file, O_RDONLY);
@@ -68,15 +42,9 @@ char **get_map(char *map_file)
 	}
 	close(fd);
 	free(line);
-	i = ft_strlen(read);
-	// printf("i = %d\n", i);
-	// while(read[i])
-	// {
-	// 	i--;
-	// 	read[i] = 0;
-	// }
-	// printf("%s|", read);
-	map = ft_split(read, '\n');
+	line = ft_strtrim(read, " \n");
+	free(read);
+	map = ft_split(line, '\n');
 	return (map);
 }
 
@@ -196,6 +164,8 @@ char **get_only_map(char **map_raw)
 	while(map_raw[i])
 	{
 		map[j] = ft_strdup(map_raw[i], 0);
+		if(map[j][0] == '\n')
+			error(map, j, 0, "newline in map");
 		j++;
 		i++;
 	}
@@ -258,8 +228,8 @@ int main(int argc, char **argv)
 		if(!map_raw)
 			error(0,0,0, "main");
 			
-		// printf("-----------------raw-----------------\n");
-		// print(map_raw);
+		printf("-----------------raw-----------------\n");
+		print(map_raw);
 		
 		map = get_only_map(map_raw);
 		printf("-----------------map-----------------\n");

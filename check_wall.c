@@ -124,13 +124,15 @@ void check_all_zeros(char **map)
 		{
 			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' ||
 				map[i][j] == 'W' || map[i][j] == 'E')
-				{
 					if ((map[i - 1][j] == ' ' || !map[i - 1][j]) ||
 						(map[i + 1][j] == ' ' || !map[i + 1][j]) ||
 						(map[i][j - 1] == ' ' || !map[i][j - 1]) ||
-						(map[i][j + 1] == ' ' || !map[i][j + 1]))
+						(map[i][j + 1] == ' ' || !map[i][j + 1]) ||
+						(map[i + 1][j - 1] == ' ' || !map[i + 1][j - 1]) ||
+						(map[i + 1][j + 1] == ' ' || !map[i + 1][j + 1]) ||
+						(map[i - 1][j + 1] == ' ' || !map[i - 1][j + 1]) ||
+						(map[i - 1][j - 1] == ' ' || !map[i - 1][j - 1]))
 						error(map,i,j,"check_zeros");
-				}
 			j++;
 		}
 		i++;
