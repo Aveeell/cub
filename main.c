@@ -6,7 +6,7 @@
 /*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:08:19 by jerrok            #+#    #+#             */
-/*   Updated: 2022/06/22 12:20:29 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/06/22 13:38:45 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,36 @@
 
 void error(char **map, int i, int j, char *where)
 {
-	if(map && i && j)
+	if(map)
 		printf("[%d][%d] - |%s|\n", i, j, map[i]);
 	printf("error: %s\n", where);
 	exit(0);
 }
+
+// char *gnl(int fd)
+// {
+// 	int rd;
+// 	int i;
+// 	char c;
+// 	char *str;
+//
+// 	i = 0;
+// 	str = malloc(10000);
+// 	while((rd = read(fd, &c, 1)) > 0)
+// 	{
+// 		str[i] = c;
+// 		i++;
+// 		if(c == '\n')
+// 			break;
+// 	}
+// 	if((!str[i-1] && !rd) || rd == -1)
+// 	{
+// 		free(str);
+// 		return 0;
+// 	}
+// 	str[i] = 0;
+// 	return str;
+// }
 
 char **get_map(char *map_file)
 {
@@ -43,9 +68,14 @@ char **get_map(char *map_file)
 	}
 	close(fd);
 	free(line);
-	i = ft_strlen(read) - 1;
-	while(read[i] == '\n' || read[i] == ' ')
-		read[i--] = '\0';
+	i = ft_strlen(read);
+	// printf("i = %d\n", i);
+	// while(read[i])
+	// {
+	// 	i--;
+	// 	read[i] = 0;
+	// }
+	// printf("%s|", read);
 	map = ft_split(read, '\n');
 	return (map);
 }
@@ -53,7 +83,7 @@ char **get_map(char *map_file)
 void	print(char **map)
 {
 	for(int i = 0; map[i]; i++)
-		printf("%s\n", map[i]);
+		printf("%d\t| %s\n", i, map[i]);
 }
 
 
@@ -68,7 +98,7 @@ int get_middle_of_map_file(char **map_raw)
 		j = 0;
 		while(map_raw[i][j])
 		{
-			if(map_raw[i][j] != '1' && map_raw[i][j] != ' ')
+			if(map_raw[i][j] != '1' && map_raw[i][j] != ' ' && map_raw[i][j] != '0')
 				break;
 			j++;
 		}
@@ -231,12 +261,12 @@ int main(int argc, char **argv)
 		// printf("-----------------raw-----------------\n");
 		// print(map_raw);
 		
-		printf("-----------------map-----------------\n");
 		map = get_only_map(map_raw);
+		printf("-----------------map-----------------\n");
 		print(map);
 		
-		// printf("-----------------tex-----------------\n");
 		textures = get_textures(map_raw);
+		// printf("-----------------tex-----------------\n");
 		// print(textures);
 		
 		free_map_raw(map_raw);

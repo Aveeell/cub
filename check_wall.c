@@ -88,7 +88,7 @@ static int check_wall_and_space(char **map, int i)
 }
 */
 
-void check_wall_around(char **map)
+void check_wall_around_map(char **map)
 {
 	int i;
 	int j;
@@ -99,26 +99,48 @@ void check_wall_around(char **map)
 		j = 0;
 		while(map[i][j] == ' ')
 			j++;
-		if(map[i][j] != '1')
-			error(map, i, j, "check_wall_around");
+		if(map[i][j] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
+			error(map, i, j, "check_wall_around | first\\last wall");
+		j = ft_strlen(map[i - 1]) - 1;
+		if(i > 0 && (j + 1) <= ft_strlen(map[i]) && map[i][j] != '1')
+			error(map, i, j, "check_wall_around equal| last wall");
+		if(i > 0 && ft_strlen(map[i]) > ft_strlen(map[i - 1]))
+		{
+			j = ft_strlen(map[i]) - 1;
+			while(map[i][j] == ' ' || map[i][j] == '1')
+				j--;
+			if(j > ft_strlen(map[i - 1]) - 1)
+			error(map, i, j, "check_wall_around different| last wall");
+		}
+		i++;
+	}
+}
+
+void check_up_n_down(char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while(map[i])
+	{
+		j = 0;
+		if(i == 0 || !map[i + 1])
+		{
+			while(map[i][j])
+			{
+				if(map[i][j] != ' ' && map[i][j] != '1')
+					error(map, i, j, "up_n_down");
+				j++;
+			}
+		}
 		i++;
 	}
 }
 
 int check_wall(char **map)
 {
-	check_wall_around(map);
-	// int i;
-	// int j;
-
-	// i = 0;
-	// while(map[i])
-	// {
-	// 	j = 0;
-	// 	while(map[i][j])
-	// 	{
-
-	// 	}
-	// }
+	check_up_n_down(map);
+	check_wall_around_map(map);
 	return 0;
 }

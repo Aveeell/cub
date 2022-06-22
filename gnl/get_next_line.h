@@ -6,13 +6,13 @@
 /*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 10:37:29 by jerrok            #+#    #+#             */
-/*   Updated: 2022/06/20 11:26:54 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/06/22 13:35:43 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFFER_SIZE 1000
+# define BUFFER_SIZE 1024
 
 # include <stdlib.h>
 # include <unistd.h>
