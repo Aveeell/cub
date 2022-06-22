@@ -6,7 +6,7 @@
 /*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:08:19 by jerrok            #+#    #+#             */
-/*   Updated: 2022/06/22 11:51:04 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/06/22 11:59:55 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,16 @@ int check_map(char **map)
 	return 0;
 }
 
+void free_map_raw(char **map)
+{
+	int i;
+	
+	i = 0;
+	while(map[i])
+		free(map[i++]);
+	free(map);
+}
+
 int main(int argc, char **argv)
 {
 	char **map_raw;
@@ -219,13 +229,14 @@ int main(int argc, char **argv)
 		
 		printf("-----------------map-----------------\n");
 		map = get_only_map(map_raw);
-		// print(map);
+		print(map);
 		
-		// printf("-----------------tex-----------------\n");
+		printf("-----------------tex-----------------\n");
 		textures = get_textures(map_raw);
-		// print(textures);
+		print(textures);
 		
-		check_map(map);
+		free_map_raw(map_raw);
+		// check_map(map);
 	}
 	return 0;
 }

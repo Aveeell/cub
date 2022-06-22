@@ -1,5 +1,6 @@
 #include "cub.h"
 
+/*
 static int check_spaces_above(char **map, int i, int j)
 {
 	if(i > 0)
@@ -85,33 +86,22 @@ static int check_wall_and_space(char **map, int i)
 	}
 	return 0;
 }
+*/
+
 
 int check_wall(char **map)
 {
 	int i;
 	int j;
 
-	i = 6;
+	i = 0;
 	while(map[i])
 	{
 		j = 0;
-		if(i == 0 || !map[i + 1])
+		while(map[i][j])
 		{
-			check_wall_and_space(map, i);
-			while(map[i][j])
-			{
-				if(map[i][j] != '1' && map[i][j] != ' ')
-				{
-					printf("3\n");
-					error(map, i, j);
-				}
-				j++;
-			}
+			
 		}
-		else
-			check_wall_and_space(map, i);
-		i++;
 	}
-	printf("\nok\n");
 	return 0;
 }
