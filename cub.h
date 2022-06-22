@@ -13,6 +13,7 @@ char	*ft_strjoin(char *s1, char *s2);
 int	ft_strncmp(const char *s1, const char *s2, int n);
 char	*ft_substr(char const *s, int start, int len);
 int check_wall(char **map);
-void error();
+void error(char **map, int i, int j, char *where);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:08:19 by jerrok            #+#    #+#             */
-/*   Updated: 2022/06/22 11:59:55 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/06/22 12:20:29 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 //1, 0, N, S, E, W, F, C, NO, SO, WE, EA
 
-void error(char **map, int i, int j)
+void error(char **map, int i, int j, char *where)
 {
 	if(map && i && j)
 		printf("[%d][%d] - |%s|\n", i, j, map[i]);
-	printf("error\n");
+	printf("error: %s\n", where);
 	exit(0);
 }
 
@@ -32,7 +32,7 @@ char **get_map(char *map_file)
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		error(0,0,0);
+		error(0,0,0, "get_map");
 	read = NULL;
 	line = get_next_line(fd);
 	while (line)
@@ -56,31 +56,6 @@ void	print(char **map)
 		printf("%s\n", map[i]);
 }
 
-void check_symbols_on_map(char **map)
-{
-	int i;
-	int j;
-	char *str;
-	
-	i = 0;
-	while(map[i])
-	{
-		j = 0;
-		str = map[i];
-		while(map[i][j])
-		{
-			if(str[j] != ' ' && str[j] != '0' && str[j] != '1' &&
-				str[j] != 'N' && str[j] != 'S' && str[j] != 'W' &&
-				str[j] != 'E')
-				{
-					printf("|%c|\n", map[i][j]);
-					error(map,i,j);
-				}
-			j++;
-		}
-		i++;
-	}
-}
 
 int get_middle_of_map_file(char **map_raw)
 {
@@ -150,6 +125,32 @@ int get_end_of_map(char **map_raw, int i)
 	return j;
 }
 
+void check_symbols_on_map(char **map)
+{
+	int i;
+	int j;
+	char *str;
+	
+	i = 0;
+	while(map[i])
+	{
+		j = 0;
+		str = map[i];
+		while(map[i][j])
+		{
+			if(str[j] != ' ' && str[j] != '0' && str[j] != '1' &&
+				str[j] != 'N' && str[j] != 'S' && str[j] != 'W' &&
+				str[j] != 'E')
+				{
+					printf("|%c|\n", map[i][j]);
+					error(map,i,j, "check_symbols");
+				}
+			j++;
+		}
+		i++;
+	}
+}
+
 char **get_only_map(char **map_raw)
 {
 	int i;
@@ -181,7 +182,7 @@ char **get_textures(char **map_raw)
 
 	i = get_middle_of_map_file(map_raw);
 	if(i != 6)
-		error(0,0,0);
+		error(0,0,0, "get_textures");
 	textures = malloc(sizeof(char **) * i + 1);
 	if(!textures)
 		return 0;
@@ -194,11 +195,13 @@ char **get_textures(char **map_raw)
 	return textures;
 }
 
+
 int check_map(char **map)
 {
 	check_wall(map);
 	return 0;
 }
+
 
 void free_map_raw(char **map)
 {
@@ -209,6 +212,7 @@ void free_map_raw(char **map)
 		free(map[i++]);
 	free(map);
 }
+
 
 int main(int argc, char **argv)
 {
@@ -222,7 +226,7 @@ int main(int argc, char **argv)
 	{
 		map_raw = get_map(argv[1]);
 		if(!map_raw)
-			error(0,0,0);
+			error(0,0,0, "main");
 			
 		// printf("-----------------raw-----------------\n");
 		// print(map_raw);
@@ -231,12 +235,12 @@ int main(int argc, char **argv)
 		map = get_only_map(map_raw);
 		print(map);
 		
-		printf("-----------------tex-----------------\n");
+		// printf("-----------------tex-----------------\n");
 		textures = get_textures(map_raw);
-		print(textures);
+		// print(textures);
 		
 		free_map_raw(map_raw);
-		// check_map(map);
+		check_map(map);
 	}
 	return 0;
 }

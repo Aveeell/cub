@@ -88,8 +88,7 @@ static int check_wall_and_space(char **map, int i)
 }
 */
 
-
-int check_wall(char **map)
+void check_wall_around(char **map)
 {
 	int i;
 	int j;
@@ -98,10 +97,28 @@ int check_wall(char **map)
 	while(map[i])
 	{
 		j = 0;
-		while(map[i][j])
-		{
-			
-		}
+		while(map[i][j] == ' ')
+			j++;
+		if(map[i][j] != '1')
+			error(map, i, j, "check_wall_around");
+		i++;
 	}
+}
+
+int check_wall(char **map)
+{
+	check_wall_around(map);
+	// int i;
+	// int j;
+
+	// i = 0;
+	// while(map[i])
+	// {
+	// 	j = 0;
+	// 	while(map[i][j])
+	// 	{
+
+	// 	}
+	// }
 	return 0;
 }
