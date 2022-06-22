@@ -112,5 +112,6 @@ int check_wall(char **map)
 			check_wall_and_space(map, i);
 		i++;
 	}
+	printf("\nok\n");
 	return 0;
 }
