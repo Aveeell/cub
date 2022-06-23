@@ -1,4 +1,4 @@
-#include "cub.h"
+#include "../cub.h"
 
 static int	ft_count_word(char const *s, char c)
 {

@@ -139,11 +139,36 @@ void check_all_zeros(char **map)
 	}
 }
 
-int check_wall(char **map)
+void check_player(char **map)
+{
+	int i;
+	int j;
+	int flag;
+
+	i = 0;
+	flag = 0;
+	while(map[i])
+	{
+		j = 0;
+		while(map[i][j])
+		{
+			if(map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' ||
+				map[i][j] == 'E')
+				flag++;
+			j++;
+		}
+		i++;
+	}
+	if(flag != 1)
+		error(0,0,0,"check_player");
+}
+
+int check_map(char **map)
 {
 	check_up_n_down(map);
 	check_wall_around_map(map);
 	check_walls_around_space(map);
 	check_all_zeros(map);
+	check_player(map);
 	return 0;
 }

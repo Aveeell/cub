@@ -1,4 +1,4 @@
-#include "cub.h"
+#include "../cub.h"
 
 static int	ft_is_set(char const *set, char c)
 {
