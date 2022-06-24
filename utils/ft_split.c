@@ -1,6 +1,6 @@
 #include "../cub.h"
 
-static int	ft_count_word(char const *s, char c)
+static int	ft_count_word(char const *s, char c, int flag)
 {
 	int	i;
 	int	word;
@@ -13,10 +13,9 @@ static int	ft_count_word(char const *s, char c)
 	{
 		if (s[i] != c && s[i - 1] == c)
 			word++;
-		if (s[i - 1] == '1' && (s[i] == c && s[i + 1] == c))
-			if (s[i - 2] != ',' && s[i - 3] != ',' && s[i - 4] != ',')
-				// return (-1);
-				error(0,0,0,"newline in map");
+		if(i > flag)
+			if(s[i] == c && s[i + 1] == c)
+				error(0,"split | newline in map");
 		i++;
 	}
 	return (word + 1);
@@ -70,16 +69,16 @@ char	**ft_split(char const *s, char c)
 {
 	int		i;
 	int		j;
-	char	**res;
+	char	**res;	
 
 	i = 0;
 	j = 0;
-	if (!s || ft_count_word(s, c) == -1)
+	if (!s || ft_count_word(s, c, check_split(s, c)) == -1)
 		return ((void *)0);
-	res = malloc(sizeof(char *) * (ft_count_word(s, c) + 1));
+	res = malloc(sizeof(char *) * (ft_count_word(s, c, check_split(s, c)) + 1));
 	if (!res)
 		return ((void *)0);
-	while (i < ft_count_word(s, c))
+	while (i < ft_count_word(s, c, check_split(s, c)))
 	{
 		res[i] = malloc(sizeof(char) * (ft_len_word(s, c, j) + 1));
 		if (!res[i])

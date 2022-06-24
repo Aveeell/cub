@@ -1,7 +1,7 @@
 NAME = cub3D
 
 ADDFLAGS = -lmlx -framework OpenGL -framework AppKit -lz
-CLFAGS = -Wall -Wextra -Werror
+CLFAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 
 SRCS =	main.c \

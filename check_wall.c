@@ -1,6 +1,6 @@
 #include "cub.h"
 
-void check_with_prev_string(char **map, int i)
+void check_with_prev_string(t_all *all, char **map, int i)
 {
 	int j;
 	int k;
@@ -12,7 +12,7 @@ void check_with_prev_string(char **map, int i)
 		if(j > k)
 		{
 			if(map[i][k] != '1')
-				error(map, i, j, "check_with_prev | no wall bottom last symbol from prev string");
+				error(all, "check_with_prev | no wall bottom last symbol from prev string");
 			while(j > k)
 			{
 				if(map[i][j] != ' ' && map[i][j] != '1')
@@ -20,12 +20,12 @@ void check_with_prev_string(char **map, int i)
 				j--;
 			}
 			if(j != k)
-				error(map, i, j, "check_with_prev");
+				error(all, "check_with_prev");
 		}
 	}
 }
 
-void check_wall_around_map(char **map)
+void check_wall_around_map(t_all *all, char **map)
 {
 	int i;
 	int j;
@@ -40,16 +40,16 @@ void check_wall_around_map(char **map)
 		{
 		printf("\n|%d|\n", ft_strlen(str));
 			free(str);
-			error(map, i, ft_strlen(map[i]), "check_wall_around | first\\last wall");
+			error(all, "check_wall_around | first\\last wall");
 		}
 		if(ft_strlen(str))
-			check_with_prev_string(map, i);
+			check_with_prev_string(all, map, i);
 		free(str);
 		i++;
 	}
 }
 
-void check_up_n_down(char **map)
+void check_up_n_down(t_all *all, char **map)
 {
 	int i;
 	int j;
@@ -63,7 +63,7 @@ void check_up_n_down(char **map)
 			while(map[i][j])
 			{
 				if(map[i][j] != ' ' && map[i][j] != '1')
-					error(map, i, j, "up_n_down");
+					error(all, "up_n_down");
 				j++;
 			}
 		}
@@ -83,7 +83,7 @@ int is_full_space(char *str)
 	return 0;
 }
 
-void check_walls_around_space(char **map)
+void check_walls_around_space(t_all *all, char **map)
 {
 	int i;
 	int j;
@@ -97,13 +97,13 @@ void check_walls_around_space(char **map)
 			if(map[i][j] == ' ')
 			{
 				if(j < ft_strlen(map[i - 1]) && (map[i - 1][j] != ' ' && map[i - 1][j] != '1'))
-					error(map, i, j, "check_space above");
+					error(all, "check_space above");
 				if(!is_full_space(map[i]) && j > 0 && (map[i][j - 1] != ' ' && map[i][j - 1] != '1'))
-					error(map, i, j, "check_space left");
+					error(all, "check_space left");
 				if(j < ft_strlen(map[i + 1]) && (map[i + 1][j] != ' ' && map[i + 1][j] != '1'))
-					error(map, i, j, "check_space bottom");
+					error(all, "check_space bottom");
 				if(!is_full_space(map[i]) && j < ft_strlen(map[i]) && (map[i][j + 1] != ' ' && map[i][j + 1] != '1'))
-					error(map, i, j, "check_space right");
+					error(all, "check_space right");
 			}
 			j++;
 		}
@@ -111,7 +111,7 @@ void check_walls_around_space(char **map)
 	}
 }
 
-void check_all_zeros(char **map)
+void check_all_zeros(t_all *all, char **map)
 {
 	int i;
 	int j;
@@ -132,14 +132,14 @@ void check_all_zeros(char **map)
 						(map[i + 1][j + 1] == ' ' || !map[i + 1][j + 1]) ||
 						(map[i - 1][j + 1] == ' ' || !map[i - 1][j + 1]) ||
 						(map[i - 1][j - 1] == ' ' || !map[i - 1][j - 1]))
-						error(map,i,j,"check_zeros");
+						error(all,"check_zeros");
 			j++;
 		}
 		i++;
 	}
 }
 
-void check_player(char **map)
+void check_player(t_all *all, char **map)
 {
 	int i;
 	int j;
@@ -160,15 +160,15 @@ void check_player(char **map)
 		i++;
 	}
 	if(flag != 1)
-		error(0,0,0,"check_player");
+		error(all,"check_player");
 }
 
-int check_map(char **map)
+int check_map(t_all *all, char **map)
 {
-	check_up_n_down(map);
-	check_wall_around_map(map);
-	check_walls_around_space(map);
-	check_all_zeros(map);
-	check_player(map);
+	check_up_n_down(all, map);
+	check_wall_around_map(all, map);
+	check_walls_around_space(all, map);
+	check_all_zeros(all, map);
+	check_player(all, map);
 	return 0;
 }

@@ -1,14 +1,31 @@
 #include "cub.h"
 
-// int ft_strlen(char *s)
-// {
-// 	int	i;
+int check_split(char const *s, char c)
+{
+	int i;
+	int len;
+	int len1;
 
-// 	i = 0;
-// 	while(s[i])
-// 		i++;
-// 	return (i);
-// }
+	i = 0;
+	while(s[i])
+	{
+		if(s[i] == c)
+		{
+			len = 1;
+			len1 = 1;
+			while(s[i] == c)
+				i++;
+			while(s[i + len] != c)
+				len++;
+			while(s[i + len1] == '1' || s[i + len1] == ' ')
+				len1++;
+			if(len == len1)
+				return i;
+		}
+		i++;
+	}
+	return 0;
+}
 
 int	ft_strncmp(const char *s1, const char *s2, int n)
 {

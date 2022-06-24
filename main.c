@@ -1,48 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 11:08:19 by jerrok            #+#    #+#             */
-/*   Updated: 2022/06/23 17:19:00 by jerrok           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub.h"
-
-//F, C, NO, SO, WE, EA
-
-void error(char **map, int i, int j, char *where)
-{
-	if(map)
-		printf("[%d][%d] - |%s|\n", i, j, map[i]);
-	printf("error: %s\n", where);
-	exit(0);
-}
-
-void	print(char **arr, t_textures *textures)
-{
-	if(arr)
-		for(int i = 0; arr[i]; i++)
-			printf("%d\t| %s\n", i, arr[i]);
-	if(textures)
-	{
-		printf("no - %s\n", textures->no);
-		printf("so - %s\n", textures->so);
-		printf("we - %s\n", textures->we);
-		printf("ea - %s\n", textures->ea);
-		printf("fl_str - %s\n", textures->fl);
-		printf("ceil_str - %s\n", textures->ceil);
-		printf("fl_rgb - ");
-		for(int i = 0; i < 3; i++)
-			printf("%d | ", textures->fl_rgb[i]);
-		printf("\nceil_rgb - ");
-		for(int i = 0; i < 3; i++)
-			printf("%d | ", textures->ceil_rgb[i]);
-	}
-}
 
 void free_array(char **map)
 {
@@ -54,58 +10,109 @@ void free_array(char **map)
 	free(map);
 }
 
-t_textures	*init_tex(void)
+void free_all(t_all *all)
 {
-	t_textures	*tex;
+		free_array(all->raw->map_raw);
+		free_array(all->raw->tex_raw);
+		free(all->raw);
+		
+		free(all->tex->no);
+		free(all->tex->so);
+		free(all->tex->we);
+		free(all->tex->ea);
+		free(all->tex->fl);
+		free(all->tex->ceil);
+		free(all->tex->fl_rgb);
+		free(all->tex->ceil_rgb);
+		free(all->tex);
+		
+		free_array(all->lvl->map);
+		mlx_destroy_image(all->lvl->mlx, all->lvl->no);
+		mlx_destroy_image(all->lvl->mlx, all->lvl->so);
+		mlx_destroy_image(all->lvl->mlx, all->lvl->we);
+		mlx_destroy_image(all->lvl->mlx, all->lvl->ea);
+		free(all->lvl->mlx);
+		free(all->lvl);
+		free(all);
+}
 
-	tex = malloc(sizeof(t_textures));
-	tex->no = 0;
-	tex->so = 0;
-	tex->we = 0;
-	tex->ea = 0;
-	tex->fl = 0;
-	tex->ceil = 0;
-	tex->fl_rgb = malloc(sizeof(int) * 3);
-	tex->ceil_rgb = malloc(sizeof(int) * 3);
-	return (tex);
+void error(t_all *all, char *where)
+{
+	printf("error: %s\n", where);
+	free_all(all);
+	exit(1);
+}
+
+t_all *init_all()
+{
+	t_all *all;
+
+	all = malloc(sizeof(t_all));
+	all->lvl = malloc(sizeof(t_lvl));
+	all->raw = malloc(sizeof(t_raw));
+	all->tex = malloc(sizeof(t_tex));
+	all->tex->no = 0;
+	all->tex->so = 0;
+	all->tex->we = 0;
+	all->tex->ea = 0;
+	all->tex->fl = 0;
+	all->tex->ceil = 0;
+	all->tex->fl_rgb = malloc(sizeof(int) * 3);
+	all->tex->ceil_rgb = malloc(sizeof(int) * 3);
+	return (all);
+}
+
+int skip(char *str)
+{
+	int i;
+
+	i = 2;
+	while (str[i] == ' ')
+		i++;
+	return (i);
+}
+
+int	get_color(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void fill_lvl_stuct(t_all *all, t_tex *tex, t_lvl *lvl)
+{
+	int w;
+	int h;
+
+	lvl->mlx = mlx_init();
+	lvl->win = mlx_new_window(lvl->mlx, 300, 300, "test");
+	lvl->no = mlx_xpm_file_to_image(lvl->mlx, &tex->no[skip(tex->no)], &w, &h);
+	lvl->so = mlx_xpm_file_to_image(lvl->mlx, &tex->so[skip(tex->so)], &w, &h);
+	lvl->we = mlx_xpm_file_to_image(lvl->mlx, &tex->we[skip(tex->we)], &w, &h);
+	lvl->ea = mlx_xpm_file_to_image(lvl->mlx, &tex->ea[skip(tex->ea)], &w, &h);
+	lvl->fl = get_color(0, tex->fl_rgb[0], tex->fl_rgb[1], tex->fl_rgb[2]);
+	lvl->ceil = get_color(0, tex->ceil_rgb[0], tex->ceil_rgb[1], tex->ceil_rgb[2]);
+	mlx_destroy_window(lvl->mlx, lvl->win);
+	if(!lvl->no || !lvl->so || !lvl->we || !lvl->ea)
+		error(all,"can't open file with textures");
 }
 
 int main(int argc, char **argv)
 {
-	char **map_raw;
-	char **map;
-	char **textures_raw;
-	t_textures *textures;
+	t_all *all;
 
-	if(argc != 2 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4))
+	if (argc != 2 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4))
 		printf("Try ./cub3D <map_file.cub>\n");
 	else
 	{
-		map_raw = get_map(argv[1]);
-		if(!map_raw)
-			error(0,0,0, "main");
-			
-		printf("-----------------raw-----------------\n");
-		print(map_raw, 0);
-		
-		map = get_only_map(map_raw);
-		printf("-----------------map-----------------\n");
-		print(map, 0);
-		
-		textures_raw = get_textures(map_raw);
-		printf("-----------------tex-----------------\n");
-		print(textures_raw, 0); 
-		
-		printf("\n----------------check-------------------\n");
-		textures = init_tex();
-		get_struct(textures_raw, textures);
-		print(0, textures);
-
-		check_map(map);
-		
-		free_array(map_raw);
-		free_array(map);
-		free_array(textures_raw);
+		all = init_all();
+		all->raw->map_raw = get_map(argv[1]);
+		if(!all->raw->map_raw)
+			error(all, "error in split");
+		all->lvl->map = get_only_map(all, all->raw->map_raw);
+		check_map(all, all->lvl->map);
+		all->raw->tex_raw = get_textures(all, all->raw->map_raw);
+		get_struct(all, all->raw->tex_raw, all->tex);
+		fill_lvl_stuct(all, all->tex, all->lvl);
+		free_all(all);
 	}
-	return 0;
+	return (0);
 }
