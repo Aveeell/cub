@@ -1,6 +1,6 @@
 #include "../cub.h"
 
-static int	ft_count_word(char const *s, char c, int flag)
+static int	ft_count_word(char *s, char c, int flag)
 {
 	int	i;
 	int	word;
@@ -14,14 +14,19 @@ static int	ft_count_word(char const *s, char c, int flag)
 		if (s[i] != c && s[i - 1] == c)
 			word++;
 		if (i > flag)
+		{
 			if (s[i] == c && s[i + 1] == c)
+			{
+				free(s);
 				error(0, "split | newline in map");
+			}
+		}
 		i++;
 	}
 	return (word + 1);
 }
 
-static int	ft_len_word(char const *s, char c, int i)
+static int	ft_len_word(char *s, char c, int i)
 {
 	int	len;
 
@@ -50,7 +55,7 @@ static char	**ft_free(char **res, int i)
 	return ((void *)0);
 }
 
-int	ft_write_str(char *res, char const *s, char c, int j)
+int	ft_write_str(char *res, char *s, char c, int j)
 {
 	int	i;
 
@@ -65,7 +70,7 @@ int	ft_write_str(char *res, char const *s, char c, int j)
 	return (j);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	int		i;
 	int		j;

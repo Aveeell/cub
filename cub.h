@@ -47,7 +47,7 @@ typedef struct s_all
 }				t_all;
 
 char	*ft_strtrim(char const *s1, char const *set);
-char	**ft_split(char const *s, char c);
+char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char const *s, int start, int len);
 int		ft_strncmp(const char *s1, const char *s2, int n);
