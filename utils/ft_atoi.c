@@ -9,8 +9,6 @@ int	ft_atoi(const char *str)
 	i = 0;
 	res = 0;
 	neg = 1;
-	if(!str)
-		return -100;
 	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
 		i++;
 	if (str[i] == '-')

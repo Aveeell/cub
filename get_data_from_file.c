@@ -1,151 +1,83 @@
 #include "cub.h"
 
-int get_middle_of_map_file(char **map_raw)
+int	check_symbols_on_map(char **map)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 0;
-	while(map_raw[i])
-	{
-		j = 0;
-		while(map_raw[i][j])
-		{
-			if(map_raw[i][j] != '1' && map_raw[i][j] != ' ' && map_raw[i][j] != '0')
-				break;
-			j++;
-		}
-		if(j == ft_strlen(map_raw[i]))
-			break;
-		i++;
-	}
-	return i;
-}
-
-int get_start_of_map(char **map_raw)
-{
-	int i;
-	int j;
-
-	i = get_middle_of_map_file(map_raw);
-	while(map_raw[i])
-	{
-		j = 0;
-		while(map_raw[i][j])
-		{
-			if(map_raw[i][j] != ' ')
-				break;
-			j++;
-		}
-		if(j != ft_strlen(map_raw[i]))
-				break;
-		i++;
-	}
-	return i;
-}
-
-int get_end_of_map(char **map_raw, int i)
-{
-	int k;
-	int j;
-
-	j = i;
-	while(map_raw[j])
-		j++;
-	while(map_raw[j])
-	{
-		k = 0;
-		while(map_raw[j][k])
-		{
-			if(map_raw[j][k] != ' ')
-				break;
-			k++;
-		}
-		if(k != ft_strlen(map_raw[j]))
-			break;
-		j--;
-	}
-	return j;
-}
-
-int check_symbols_on_map(char **map)
-{
-	int i;
-	int j;
-	char *str;
-	
-	i = 0;
-	while(map[i])
+	while (map[i])
 	{
 		j = 0;
 		str = map[i];
-		while(map[i][j])
+		while (map[i][j])
 		{
-			if(str[j] != ' ' && str[j] != '0' && str[j] != '1' &&
-				str[j] != 'N' && str[j] != 'S' && str[j] != 'W' &&
+			if (str[j] != ' ' && str[j] != '0' && str[j] != '1' && \
+				str[j] != 'N' && str[j] != 'S' && str[j] != 'W' && \
 				str[j] != 'E')
-					return 0;
+				return (0);
 			j++;
 		}
 		i++;
 	}
-	return 1;
+	return (1);
 }
 
-char **get_only_map(t_all *all, char **map_raw)
+char	**get_only_map(t_all *all, char **map_raw)
 {
-	int i;
-	int j;
-	char **map;
+	int		i;
+	int		j;
+	char	**map;
 
 	i = get_start_of_map(map_raw);
 	j = get_end_of_map(map_raw, i);
 	map = malloc(sizeof(char **) * j - i + 1);
-	if(!map)
+	if (!map)
 		error(all, "get_only_map mem alloc failed");
 	j = 0;
-	while(map_raw[i])
+	while (map_raw[i])
 	{
 		map[j] = ft_strdup(map_raw[i], 0);
-		if(!map[j])
+		if (!map[j])
 			error(all, "get_only_map mem alloc failed (strdup)");
 		j++;
 		i++;
 	}
 	map[j] = 0;
-	if(!check_symbols_on_map(map))
+	if (!check_symbols_on_map(map))
 		error(all, "check_symbols wrong symbols on map");
-	return map;
+	return (map);
 }
 
-char **get_textures(t_all *all, char **map_raw)
+char	**get_textures(t_all *all, char **map_raw)
 {
-	int i;
-	char **textures;
+	int		i;
+	char	**textures;
 
 	i = get_middle_of_map_file(map_raw);
-	if(i != 6)
+	if (i != 6)
 		error(all, "get_textures tex != 6");
 	textures = malloc(sizeof(char **) * i + 1);
-	if(!textures)
+	if (!textures)
 		error(all, "get_textures mem alloc failed");
 	textures[i] = 0;
-	while(i)
+	while (i)
 	{
 		i--;
 		textures[i] = ft_strdup(map_raw[i], 0);
-		if(!textures[i])
+		if (!textures[i])
 			error(all, "get_textures mem alloc failed (strdup)");
 	}
-	return textures;
+	return (textures);
 }
 
-char **get_map(char *map_file)
+char	**get_map(char *map_file)
 {
-	char **map;
-	char *read;
-	char *line;
-	int fd;
+	char	**map;
+	char	*read;
+	char	*line;
+	int		fd;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)

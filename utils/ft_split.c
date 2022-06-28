@@ -13,9 +13,9 @@ static int	ft_count_word(char const *s, char c, int flag)
 	{
 		if (s[i] != c && s[i - 1] == c)
 			word++;
-		if(i > flag)
-			if(s[i] == c && s[i + 1] == c)
-				error(0,"split | newline in map");
+		if (i > flag)
+			if (s[i] == c && s[i + 1] == c)
+				error(0, "split | newline in map");
 		i++;
 	}
 	return (word + 1);
