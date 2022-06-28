@@ -1,8 +1,7 @@
 NAME = cub3D
 
 ADDFLAGS = -lmlx -framework OpenGL -framework AppKit -lz
-# ADDFLAGS = mlx/libmlx.a -framework OpenGL -framework AppKit -lz
-CLFAGS = -Wall -Wextra -Werror -g# -fsanitize=address
+CLFAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 
 SRCS =	main.c \
