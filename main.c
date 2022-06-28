@@ -1,5 +1,17 @@
 #include "cub.h"
 
+static void	get_all_struct(char *argv, t_all *all)
+{
+	all->raw->map_raw = get_map(argv);
+	if (!all->raw->map_raw)
+		error(0, "can't open file");
+	all->lvl->map = get_only_map(all, all->raw->map_raw);
+	check_map(all, all->lvl->map);
+	all->raw->tex_raw = get_textures(all, all->raw->map_raw);
+	get_struct(all, all->raw->tex_raw, all->tex);
+	fill_lvl_stuct(all, all->tex, all->lvl);
+}
+
 int	main(int argc, char **argv)
 {
 	t_all	*all;
@@ -9,14 +21,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		all = init_all();
-		all->raw->map_raw = get_map(argv[1]);
-		if (!all->raw->map_raw)
-			error(all, "error in split");
-		all->lvl->map = get_only_map(all, all->raw->map_raw);
-		check_map(all, all->lvl->map);
-		all->raw->tex_raw = get_textures(all, all->raw->map_raw);
-		get_struct(all, all->raw->tex_raw, all->tex);
-		fill_lvl_stuct(all, all->tex, all->lvl);
+		get_all_struct(argv[1], all);
 		free_all(all);
 	}
 	return (0);

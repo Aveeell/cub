@@ -75,5 +75,5 @@ void	error(t_all *all, char *where)
 	printf("error: %s\n", where);
 	if (all)
 		free_all(all);
-	exit(1);
+	exit(0);
 }

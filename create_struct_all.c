@@ -20,6 +20,7 @@ void	fill_lvl_stuct(t_all *all, t_tex *tex, t_lvl *lvl)
 	int	w;
 	int	h;
 
+	all->lvl->mlx = mlx_init();
 	lvl->no = mlx_xpm_file_to_image(lvl->mlx, &tex->no[skip(tex->no)], &w, &h);
 	lvl->so = mlx_xpm_file_to_image(lvl->mlx, &tex->so[skip(tex->so)], &w, &h);
 	lvl->we = mlx_xpm_file_to_image(lvl->mlx, &tex->we[skip(tex->we)], &w, &h);
@@ -46,6 +47,5 @@ t_all	*init_all(void)
 	all->tex->ceil = 0;
 	all->tex->fl_rgb = malloc(sizeof(int) * 3);
 	all->tex->cl_rgb = malloc(sizeof(int) * 3);
-	all->lvl->mlx = mlx_init();
 	return (all);
 }

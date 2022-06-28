@@ -7,15 +7,15 @@ RM = rm -f
 SRCS =	main.c \
 		check_wall.c \
 		check_textures.c \
-		get_data_from_file.c \
-		create_struct_all.c \
 		free_and_error.c \
 		get_pos_on_map.c \
+		create_struct_all.c \
+		get_data_from_file.c \
 		check_spaces_n_zeros.c \
+		utils.c \
+		utils/ft_atoi.c \
 		utils/ft_split.c \
 		utils/ft_strtrim.c \
-		utils/ft_atoi.c \
-		utils.c \
 		gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
 
