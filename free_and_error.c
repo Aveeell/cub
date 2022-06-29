@@ -62,8 +62,6 @@ void	free_all(t_all *all)
 			mlx_destroy_image(all->lvl->mlx, all->lvl->we);
 		if (all->lvl->ea)
 			mlx_destroy_image(all->lvl->mlx, all->lvl->ea);
-		if (all->lvl->mlx)
-			free(all->lvl->mlx);
 		free(all->lvl);
 	}
 	free(all);
