@@ -5,6 +5,8 @@ CLFAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 
 SRCS =	main.c \
+		move.c \
+		init_game.c \
 		check_wall.c \
 		check_textures.c \
 		free_and_error.c \

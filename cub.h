@@ -7,6 +7,7 @@
 # include <unistd.h>
 # include "gnl/get_next_line.h"
 # include <mlx.h>
+# include <math.h>
 
 typedef struct s_tex
 {
@@ -46,6 +47,21 @@ typedef struct s_all
 	t_tex	*tex;
 }				t_all;
 
+typedef struct s_data {
+	char	**map;
+	void	*mlx;
+	void	*win;
+	int		step;
+	float	turn;
+	float	pl_x;
+	float	pl_y;
+	float	pl_pov;
+	int		scale;
+	int		win_hor;
+	int		win_vert;
+	t_all	*all;
+}			t_data;
+
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
@@ -72,5 +88,15 @@ int		get_start_of_map(char **map_raw);
 int		get_end_of_map(char **map_raw, int i);
 void	check_walls_around_space(t_all *all, char **map);
 void	check_all_zeros(t_all *all, char **map);
+
+void	ft_move_u_d(t_data *data, char dest);
+void	ft_move_l_r(t_data *data, char dest);
+void	ft_turn_l_r(t_data *data, char dest);
+void	ft_draw_ray(t_data *data);
+
+float	find_pov(char c);
+void	ft_find_player(t_data *data);
+int		exit_hook(t_data *data);
+int		key_hook(int key_code, t_data *data);
 
 #endif
