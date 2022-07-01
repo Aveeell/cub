@@ -8,6 +8,18 @@
 # include "gnl/get_next_line.h"
 # include <mlx.h>
 
+typedef struct s_img
+{
+	void *img;
+	void *try;
+	char *try_addr;
+	int bits_per_pix;
+	int size;
+	int end;
+	char *addr;
+	int color;
+}				t_img;
+
 typedef struct s_tex
 {
 	char	*no;
@@ -37,6 +49,7 @@ typedef struct s_lvl
 	void	*ea;
 	int		fl;
 	int		ceil;
+	t_img	*no1;
 }				t_lvl;
 
 typedef struct s_all
@@ -72,6 +85,7 @@ int		get_start_of_map(char **map_raw);
 int		get_end_of_map(char **map_raw, int i);
 void	check_walls_around_space(t_all *all, char **map);
 void	check_all_zeros(t_all *all, char **map);
+int	get_color(int t, int r, int g, int b);
 
 //------------------------------------------------------------------------------
 #include <math.h>
