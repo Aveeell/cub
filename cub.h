@@ -60,6 +60,7 @@ typedef struct s_data {
 	int		win_hor;
 	int		win_vert;
 	t_all	*all;
+	int		count_frame;
 }			t_data;
 
 char	*ft_strtrim(char const *s1, char const *set);

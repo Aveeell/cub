@@ -24,6 +24,11 @@ void	ft_put_pixel_scale(t_data *data, float i, float j, int color)
 		while (y < data->scale * (i + 1))
 		{
 			mlx_pixel_put(data->mlx, data->win, x, y, color);
+			// mlx_pixel_put(data->mlx, data->win, x, y, get_pixel());
+
+			// get_pixel(data->all->tex->no,
+			// 		game->x_side * game->north_wall->w, game->side_img->h
+			// 		* (y - (HEIGHT - h) / 2) / h)
 			y++;
 		}
 		x++;
@@ -49,19 +54,20 @@ float	ft_one_ray(t_data *data, float pov_tmp)
 {
 	float	x;
 	float	y;
-	float	len;
-
+	// float	len;
+	int		len;
+	
+	len = 0;
 	x = data->pl_x;
 	y = data->pl_y;
 	while (data->map[(int)(y / data->scale)][(int)(x / data->scale)] != '1')
 	{
 		x += cos(pov_tmp);
 		y += sin(pov_tmp);
-		// l++;
+		len++;
 	}
 	// printf("l = %d\n", l);
-	len = sqrt(pow((data->pl_y - y), 2) + pow((data->pl_x - x), 2)); // долго!!
-	// len = l;
+	// len = sqrt(pow((data->pl_y - y), 2) + pow((data->pl_x - x), 2)); // долго!!
 	len *= cos(data->pl_pov - pov_tmp);
 	return (len);
 }
@@ -86,11 +92,23 @@ void	ft_draw_ray(t_data *data)
 }
 
 //-----------------------------------------------------------------------------------------
+int render(t_data *data)
+{
+	if (data->count_frame % 4 == 0)
+	{
+		mlx_clear_window(data->mlx, data->win);
+		ft_draw_ray(data);
+	}
+	data->count_frame++;
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_all	*all;
 	t_data	data;
 
+	data.count_frame = 0;
 	data.step = 20;
 	data.turn = 0.1;
 	data.scale = 225; //size of texture
@@ -110,6 +128,7 @@ int	main(int argc, char **argv)
 		ft_draw_ray(&data);
 		mlx_hook(data.win, 17, 0, &exit_hook, &data);
 		mlx_hook(data.win, 2, 0, key_hook, &data);
+		mlx_loop_hook(data.mlx, render, &data);
 		mlx_loop(data.mlx);
 	}
 	return (0);

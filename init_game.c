@@ -46,7 +46,7 @@ int	exit_hook(t_data *data)
 
 int	key_hook(int key_code, t_data *data)
 {
-	mlx_clear_window(data->mlx, data->win);
+	// mlx_clear_window(data->mlx, data->win);
 	if (key_code == 13)
 		ft_move_u_d(data, 'W');
 	if (key_code == 1)
@@ -61,6 +61,6 @@ int	key_hook(int key_code, t_data *data)
 		ft_turn_l_r(data, 'r');
 	if (key_code == 53)
 		exit_hook(data);
-	ft_draw_ray(data);
+	// ft_draw_ray(data);
 	return (0);
 }
