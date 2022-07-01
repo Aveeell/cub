@@ -18,6 +18,7 @@ SRCS =	main.c \
 		utils/ft_strtrim.c \
 		gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
+		data_utils.c \
 
 OBJ := $(SRCS:%.c=%.o)
 

@@ -73,4 +73,35 @@ int		get_end_of_map(char **map_raw, int i);
 void	check_walls_around_space(t_all *all, char **map);
 void	check_all_zeros(t_all *all, char **map);
 
+//------------------------------------------------------------------------------
+#include <math.h>
+
+struct s_data {
+	char	**map;
+	int		num_rows;
+	int		width;
+	int		height;
+	void	*mlx;
+	void	*win;
+	float	pl_x;
+	float	pl_y;
+	float	pl_POV;
+	float	pl_FOV_begin;
+	float	pl_FOV_end;
+	int		scale;
+	int		win_hor_size;
+	int		win_vert_size;
+	t_all	*all;
+};
+
+void ft_find_player(struct s_data *data);
+void ft_put_pixel_scale(struct s_data *data, float i, float j, int color);
+void draw_column(struct s_data *data, float ray_len, int j, float angle);
+void ft_draw_ray(struct s_data *data);
+int	exit_hook(struct s_data *data);
+void ft_move(struct s_data *data, char dest);
+int	key_hook(int key_code, struct s_data *data);
+
+//------------------------------------------------------------------------------
+
 #endif
