@@ -41,9 +41,9 @@ void	check_wall_around_map(t_all *all, char **map)
 			free(str);
 			error(all, "check_wall_around | first\\last wall");
 		}
+		free(str);
 		if (ft_strlen(str))
 			check_with_prev_string(all, map, i);
-		free(str);
 		i++;
 	}
 }

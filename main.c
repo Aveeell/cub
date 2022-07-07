@@ -5,11 +5,26 @@ static void	get_all_struct(char *argv, t_all *all)
 	all->raw->map_raw = get_map(argv);
 	if (!all->raw->map_raw)
 		error(0, "can't open file");
-	all->lvl->map = get_only_map(all, all->raw->map_raw);
-	check_map(all, all->lvl->map);
+	all->data->map = get_only_map(all, all->raw->map_raw);
+	check_map(all, all->data->map);
 	all->raw->tex_raw = get_textures(all, all->raw->map_raw);
 	get_struct(all, all->raw->tex_raw, all->tex);
-	fill_lvl_stuct(all, all->tex, all->lvl);
+	fill_lvl_stuct(all, all->tex, all->data);
+}
+
+void	run_game(t_data *data, t_all *all)
+{
+	(void)all;
+	ft_find_player(data);
+	data->draw->img = mlx_new_image(data->mlx, data->win_w, data->win_h);
+	data->draw->addr = mlx_get_data_addr(data->draw->img, &data->draw->bpp, \
+										&data->draw->l_len, &data->draw->end);
+	data->win = mlx_new_window(data->mlx, data->win_w, data->win_h, "cub3d");
+	ft_draw_ray(data);
+	mlx_hook(data->win, 17, 0, exit_hook, all);
+	mlx_hook(data->win, 2, 0, key_hook, all);
+	mlx_loop_hook(data->mlx, render, data);
+	mlx_loop(data->mlx);
 }
 
 int	main(int argc, char **argv)
@@ -22,7 +37,7 @@ int	main(int argc, char **argv)
 	{
 		all = init_all();
 		get_all_struct(argv[1], all);
-		free_all(all);
+		run_game(all->data, all);
 	}
 	return (0);
 }

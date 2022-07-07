@@ -18,6 +18,11 @@ SRCS =	main.c \
 		utils/ft_strtrim.c \
 		gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
+		move.c \
+		cast_ray.c \
+		draw_column.c \
+		hook_and_render.c \
+		
 
 OBJ := $(SRCS:%.c=%.o)
 

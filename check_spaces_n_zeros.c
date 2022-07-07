@@ -41,21 +41,6 @@ void	check_walls_around_space(t_all *all, char **map)
 	}
 }
 
-/*
-	if (j < ft_strlen(map[i - 1]) && (map[i - 1][j] != ' ' && \
-		map[i - 1][j] != '1'))
-		error(all, "check_space above");
-	if (!is_full_space(map[i]) && j > 0 && \
-		(map[i][j - 1] != ' ' && map[i][j - 1] != '1'))
-		error(all, "check_space left");
-	if (j < ft_strlen(map[i + 1]) && (map[i + 1][j] != ' ' && \
-		map[i + 1][j] != '1'))
-		error(all, "check_space bottom");
-	if (!is_full_space(map[i]) && j < ft_strlen(map[i]) && \
-		(map[i][j + 1] != ' ' && map[i][j + 1] != '1'))
-		error(all, "check_space right");
-*/
-
 void	check_all_zeros(t_all *all, char **map)
 {
 	int	i;
