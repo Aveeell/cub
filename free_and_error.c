@@ -50,19 +50,20 @@ void	free_all(t_all *all)
 {
 	free_raw(all);
 	free_tex(all);
-	if (all->lvl)
+	if (all->data)
 	{
-		if (all->lvl->map)
-			free_array(all->lvl->map);
-		if (all->lvl->no)
-			mlx_destroy_image(all->lvl->mlx, all->lvl->no);
-		if (all->lvl->so)
-			mlx_destroy_image(all->lvl->mlx, all->lvl->so);
-		if (all->lvl->we)
-			mlx_destroy_image(all->lvl->mlx, all->lvl->we);
-		if (all->lvl->ea)
-			mlx_destroy_image(all->lvl->mlx, all->lvl->ea);
-		free(all->lvl);
+		if (all->data->map)
+			free_array(all->data->map);
+		if (all->data->no)
+			free(all->data->no);
+		if (all->data->so)
+			free(all->data->so);
+		if (all->data->we)
+			free(all->data->we);
+		if (all->data->ea)
+			free(all->data->ea);
+		if (all->data->draw)
+			free(all->data->draw);
 	}
 	free(all);
 	exit(0);

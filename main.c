@@ -5,41 +5,39 @@ static void	get_all_struct(char *argv, t_all *all)
 	all->raw->map_raw = get_map(argv);
 	if (!all->raw->map_raw)
 		error(0, "can't open file");
-	all->lvl->map = get_only_map(all, all->raw->map_raw);
-	check_map(all, all->lvl->map);
+	all->data->map = get_only_map(all, all->raw->map_raw);
+	check_map(all, all->data->map);
 	all->raw->tex_raw = get_textures(all, all->raw->map_raw);
 	get_struct(all, all->raw->tex_raw, all->tex);
-	fill_lvl_stuct(all, all->tex, all->lvl);
+	fill_lvl_stuct(all, all->tex, all->data);
 }
-//----------------------------------------------------------------------------------------
-// void	pix_to_img(t_img *img, int x, int y, int color)
-// {
-// 	char	*addr;
 
-// 	addr = img->cur_addr + (y * img->size + x * (img->bit_per_pix / 8));
-// 	*(unsigned int *)addr = color;
-// }
-//-----------------------------------------------------------------------------------------
+void	run_game(t_data *data, t_all *all)
+{
+	(void)all;
+	ft_find_player(data);
+	data->draw->img = mlx_new_image(data->mlx, data->win_w, data->win_h);
+	data->draw->addr = mlx_get_data_addr(data->draw->img, &data->draw->bpp, \
+										&data->draw->l_len, &data->draw->end);
+	data->win = mlx_new_window(data->mlx, data->win_w, data->win_h, "cub3d");
+	ft_draw_ray(data);
+	mlx_hook(data->win, 17, 0, exit_hook, all);
+	mlx_hook(data->win, 2, 0, key_hook, all);
+	mlx_loop_hook(data->mlx, render, data);
+	mlx_loop(data->mlx);
+}
+
 int	main(int argc, char **argv)
 {
 	t_all	*all;
-
-	struct s_data data;
-	data.height = 1000;
-	data.width = 1000;
-	data.num_rows = 7;
-	data.scale = 64; //size of texture
-	data.win_hor_size = 848; //window horizontal size
-	data.win_vert_size = 480; //window vertical size
 
 	if (argc != 2 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4))
 		printf("Try ./cub3D <map_file.cub>\n");
 	else
 	{
 		all = init_all();
-		data.all = all;
 		get_all_struct(argv[1], all);
-		run_game(data, all);
+		run_game(all->data, all);
 	}
 	return (0);
 }

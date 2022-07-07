@@ -15,20 +15,32 @@ static int	get_color(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	fill_lvl_stuct(t_all *all, t_tex *tex, t_lvl *lvl)
+void	fill_lvl_stuct(t_all *all, t_tex *tex, t_data *data)
 {
 	int	w;
 	int	h;
 
-	all->lvl->mlx = mlx_init();
-	lvl->no = mlx_xpm_file_to_image(lvl->mlx, &tex->no[skip(tex->no)], &w, &h);
-	lvl->so = mlx_xpm_file_to_image(lvl->mlx, &tex->so[skip(tex->so)], &w, &h);
-	lvl->we = mlx_xpm_file_to_image(lvl->mlx, &tex->we[skip(tex->we)], &w, &h);
-	lvl->ea = mlx_xpm_file_to_image(lvl->mlx, &tex->ea[skip(tex->ea)], &w, &h);
-	lvl->fl = get_color(0, tex->fl_rgb[0], tex->fl_rgb[1], tex->fl_rgb[2]);
-	lvl->ceil = get_color(0, tex->cl_rgb[0], tex->cl_rgb[1], tex->cl_rgb[2]);
-	if (!lvl->no || !lvl->so || !lvl->we || !lvl->ea)
+	all->data->mlx = mlx_init();
+	data->no->img = mlx_xpm_file_to_image(data->mlx, &tex->no[skip(tex->no)], \
+											&w, &h);
+	data->so->img = mlx_xpm_file_to_image(data->mlx, &tex->so[skip(tex->so)], \
+											&w, &h);
+	data->we->img = mlx_xpm_file_to_image(data->mlx, &tex->we[skip(tex->we)], \
+											&w, &h);
+	data->ea->img = mlx_xpm_file_to_image(data->mlx, &tex->ea[skip(tex->ea)], \
+											&w, &h);
+	data->fl = get_color(0, tex->fl_rgb[0], tex->fl_rgb[1], tex->fl_rgb[2]);
+	data->ceil = get_color(0, tex->cl_rgb[0], tex->cl_rgb[1], tex->cl_rgb[2]);
+	if (!data->no || !data->so || !data->we || !data->ea)
 		error(all, "can't open file with textures");
+	data->no->addr = mlx_get_data_addr(data->no->img,
+			&data->no->bpp, &data->no->l_len, &data->no->end);
+	data->ea->addr = mlx_get_data_addr(data->ea->img,
+			&data->ea->bpp, &data->ea->l_len, &data->ea->end);
+	data->so->addr = mlx_get_data_addr(data->so->img,
+			&data->so->bpp, &data->so->l_len, &data->so->end);
+	data->we->addr = mlx_get_data_addr(data->we->img,
+			&data->we->bpp, &data->we->l_len, &data->we->end);
 }
 
 t_all	*init_all(void)
@@ -36,9 +48,19 @@ t_all	*init_all(void)
 	t_all	*all;
 
 	all = malloc(sizeof(t_all));
-	all->lvl = malloc(sizeof(t_lvl));
 	all->raw = malloc(sizeof(t_raw));
 	all->tex = malloc(sizeof(t_tex));
+	all->data = malloc(sizeof(t_data));
+	all->data->no = malloc(sizeof(t_img));
+	all->data->so = malloc(sizeof(t_img));
+	all->data->we = malloc(sizeof(t_img));
+	all->data->ea = malloc(sizeof(t_img));
+	all->data->draw = malloc(sizeof(t_img));
+	all->data->scale = 64;
+	all->data->win_w = 848;
+	all->data->win_h = 480;
+	all->data->step = 10;
+	all->data->turn = 0.1;
 	all->tex->no = 0;
 	all->tex->so = 0;
 	all->tex->we = 0;
