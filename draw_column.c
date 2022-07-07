@@ -14,32 +14,32 @@ void	put_pixel(t_img *draw, int x, int y, unsigned int color)
 	*(unsigned *)dst = color;
 }
 
-float	get_delta(t_data *data, float x, float y)
+long double	get_delta(t_data *data, long double x, long double y)
 {
 	x = x / data->scale;
 	y = y / data->scale;
-	if (data->map[(int)(y)][(int)(x + 0.001f)] != '1')
+	if (data->map[(int)(y)][(int)(x + 0.001)] != '1')
 	{
 		data->cur_wall = data->we;
-		return (((float)(int)y + 1.0f) - y);
+		return (((long double)(int)y + 1.0) - y);
 	}
-	if (data->map[(int)(y + 0.001f)][(int)(x)] != '1')
+	if (data->map[(int)(y + 0.001)][(int)(x)] != '1')
 	{
 		data->cur_wall = data->no;
-		return (x - (float)(int)x);
+		return (x - (long double)(int)x);
 	}
-	if (data->map[(int)(y)][(int)(x - 0.001f)] != '1')
+	if (data->map[(int)(y)][(int)(x - 0.001)] != '1')
 	{
 		data->cur_wall = data->ea;
-		return (y - (float)(int)y);
+		return (y - (long double)(int)y);
 	}
-	if (data->map[(int)(y - 0.001f)][(int)(x)] != '1')
+	if (data->map[(int)(y - 0.001)][(int)(x)] != '1')
 	{
 		data->cur_wall = data->so;
-		return (((float)(int)x + 1.0f) - x);
+		return (((long double)(int)x + 1.0) - x);
 	}
 	data->cur_wall = data->we;
-	return (0.0f);
+	return (0.0);
 }
 
 void	get_values(t_data *data, long double *start, long double *finish,
@@ -54,13 +54,13 @@ void	get_values(t_data *data, long double *start, long double *finish,
 		*finish = data->win_h;
 }
 
-void	draw_column(t_data *data, int j, float x, float y)
+void	draw_column(t_data *data, int j, long double x, long double y)
 {
 	int			i;
 	long double	start;
 	long double	finish;
 	long double	col_h;
-	float		delta_y;
+	long double		delta_y;
 
 	i = 0;
 	get_values(data, &start, &finish, &col_h);
