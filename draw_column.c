@@ -50,8 +50,8 @@ void	get_values(t_data *data, long double *start, long double *finish,
 	*finish = data->win_h - (data->win_h - *col_h) / 2;
 	if (*start < 0)
 		*start = 0;
-	if (*finish > data->win_w)
-		*finish = data->win_w;
+	if (*finish > data->win_h)
+		*finish = data->win_h;
 }
 
 void	draw_column(t_data *data, int j, float x, float y)

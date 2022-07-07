@@ -1,15 +1,15 @@
 #include "cub.h"
 
-void	get_orientation(t_data *data, int i, int j)
+float	ft_find_pov(char c)
 {
-	if (data->map[i][j] == 'N')
-		data->pl_pov = 3 * M_PI / 2;
-	else if (data->map[i][j] == 'S')
-		data->pl_pov = M_PI / 2;
-	else if (data->map[i][j] == 'E')
-		data->pl_pov = 0;
-	else if (data->map[i][j] == 'W')
-		data->pl_pov = M_PI;
+	if (c == 'N')
+		return (3 * M_PI / 2);
+	else if (c == 'S')
+		return (M_PI / 2);
+	else if (c == 'E')
+		return (0);
+	else
+		return (M_PI);
 }
 
 void	ft_find_player(struct s_data *data)
@@ -28,7 +28,7 @@ void	ft_find_player(struct s_data *data)
 			{
 				data->pl_x = data->scale * (j + 0.5);
 				data->pl_y = data->scale * (i + 0.5);
-				get_orientation(data, i, j);
+				data->pl_pov = ft_find_pov(data->map[i][j]);
 			}
 			j++;
 		}
@@ -76,6 +76,7 @@ int	render(t_data *data)
 	{
 		mlx_clear_window(data->mlx, data->win);
 		ft_draw_ray(data);
+		ft_draw_minimap(data);
 		mlx_put_image_to_window(data->mlx, data->win, data->draw->img, 0, 0);
 		frame = 0;
 	}

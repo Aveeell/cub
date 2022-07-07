@@ -22,6 +22,7 @@ SRCS =	main.c \
 		cast_ray.c \
 		draw_column.c \
 		hook_and_render.c \
+		minimap.c
 		
 
 OBJ := $(SRCS:%.c=%.o)

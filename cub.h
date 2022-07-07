@@ -45,6 +45,7 @@ typedef struct s_data {
 	float	pl_y;
 	float	pl_pov;
 	int		scale;
+	int		scale_minimap;
 	int		win_w;
 	int		win_h;
 	int		fl;
@@ -106,5 +107,9 @@ void			ft_turn_l_r(t_data *data, char dest);
 int				key_hook(int key_code, t_all *all);
 int				render(t_data *data);
 void			run_game(t_data *data, t_all *all);
+
+void			ft_put_pixel(t_data *data, float i, float j, int color);
+void			ft_draw_player(t_data *data, float i, float j, int color);
+void			ft_draw_minimap(t_data *data);
 
 #endif
