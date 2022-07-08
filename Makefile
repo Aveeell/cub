@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/07/08 13:05:18 by mkoch             #+#    #+#              #
+#    Updated: 2022/07/08 13:05:19 by mkoch            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D
 
 ADDFLAGS = -lmlx -framework OpenGL -framework AppKit -lz
@@ -23,6 +35,7 @@ SRCS =	main.c \
 		cast_ray.c \
 		draw_column.c \
 		hook_and_render.c \
+		mouse.c \
 		
 
 OBJ := $(SRCS:%.c=%.o)

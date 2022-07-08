@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 13:05:15 by mkoch             #+#    #+#             */
+/*   Updated: 2022/07/08 13:06:13 by mkoch            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 static void	get_all_struct(char *argv, t_all *all)
@@ -22,12 +34,13 @@ void	run_game(t_data *data, t_all *all)
 	data->draw->addr = mlx_get_data_addr(data->draw->img, &data->draw->bpp, \
 										&data->draw->l_len, &data->draw->end);
 	data->win = mlx_new_window(data->mlx, data->win_w, data->win_h, "cub3d");
-	// ft_draw_ray(data);
 	while (data->map[k])
 		k++;
 	data->scale_minimap = (int)(0.3 * data->win_h / k);
 	mlx_hook(data->win, 17, 0, exit_hook, all);
 	mlx_hook(data->win, 2, 0, key_hook, all);
+	mlx_mouse_hook(data->win, mouse_toogle, data);
+	mlx_hook(data->win, 6, 0, mouse_move, data);
 	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop(data->mlx);
 }
@@ -46,8 +59,3 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
-/*
-если объявить mlx в структуре lvl или all, то будет утечка на [98304]
-если объявить mlx просто в main(), утечки нет
-*/

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 13:05:21 by mkoch             #+#    #+#             */
+/*   Updated: 2022/07/08 13:05:53 by mkoch            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 void	ft_put_pixel(t_data *data, float i, float j, int color)
@@ -58,12 +70,6 @@ void	ft_draw_minimap(t_data *data)
 		}
 		i++;
 	}
-	//mlx_pixel_put(data->mlx, data->win, data->pl_x, data->pl_y, 0x00FF0000);
-	// printf("y = %f\n", (data->pl_y/data->scale) - 0.5);
-	// printf("x = %f\n", (data->pl_x/data->scale) - 0.5);
 	ft_draw_player(data, (data->pl_y / data->scale) - 0.5, \
 					(data->pl_x / data->scale) - 0.5, 0x00FFFF00);
-	// printf("here\n");
-	// ft_draw_ray(data);
-	// ft_put_pixel_scale(data, data->pl_y/data->scale, data->pl_x/data->scale, 0x00FFFF00, scale);
 }
