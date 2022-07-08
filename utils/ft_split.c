@@ -7,8 +7,8 @@ static int	ft_count_word(char *s, char c, int flag)
 
 	i = 0;
 	word = 0;
-	if (!s || s[0] == '\0')
-		return (0);
+	if (!s || s[0] == '\0' || flag == -1)
+		return (-1);
 	while (s[i] != '\0')
 	{
 		if (s[i] != c && s[i - 1] == c)
