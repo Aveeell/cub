@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_struct_all.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:04:54 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 13:04:55 by mkoch            ###   ########.fr       */
+/*   Updated: 2022/07/08 15:16:58 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_all	*init_all(void)
 	all->data->scale = 64;
 	all->data->turn = 0.1;
 	all->data->step = 10;
+	all->data->map = 0;
 	all->tex->no = 0;
 	all->tex->so = 0;
 	all->tex->we = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_from_file.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:05:05 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 13:05:06 by mkoch            ###   ########.fr       */
+/*   Updated: 2022/07/08 15:17:17 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,17 @@ int	check_symbols_on_map(char **map)
 {
 	int		i;
 	int		j;
-	char	*str;
 
 	i = 0;
 	while (map[i])
 	{
 		j = 0;
-		str = map[i];
 		while (map[i][j])
 		{
-			if (str[j] != ' ' && str[j] != '0' && str[j] != '1' && \
-				str[j] != 'N' && str[j] != 'S' && str[j] != 'W' && \
-				str[j] != 'E')
-				return (0);
+			if (map[i][j] != ' ' && map[i][j] != '0' && map[i][j] != '1' && \
+				map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'W' && \
+				map[i][j] != 'E')
+					return (0);
 			j++;
 		}
 		i++;
@@ -36,30 +34,28 @@ int	check_symbols_on_map(char **map)
 	return (1);
 }
 
-char	**get_only_map(t_all *all, char **map_raw)
+void	get_only_map(t_all *all, char **map_raw)
 {
 	int		i;
 	int		j;
-	char	**map;
 
 	i = get_start_of_map(map_raw);
 	j = get_end_of_map(map_raw, i);
-	map = malloc(sizeof(char **) * j - i + 1);
-	if (!map)
+	if (!check_symbols_on_map(&map_raw[i]))
+		error(all, "check_symbol");
+	all->data->map = malloc(sizeof(char *) * j - i);
+	if (!all->data->map)
 		error(all, "get_only_map mem alloc failed");
 	j = 0;
 	while (map_raw[i])
 	{
-		map[j] = ft_strdup(map_raw[i], 0);
-		if (!map[j])
+		all->data->map[j] = ft_strdup(map_raw[i], 0);
+		if (!all->data->map[j])
 			error(all, "get_only_map mem alloc failed (strdup)");
 		j++;
 		i++;
 	}
-	map[j] = 0;
-	if (!check_symbols_on_map(map))
-		error(all, "check_symbols wrong symbols on map");
-	return (map);
+	all->data->map[j] = 0;
 }
 
 char	**get_textures(t_all *all, char **map_raw)

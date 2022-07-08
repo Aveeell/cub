@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:05:01 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 13:05:02 by mkoch            ###   ########.fr       */
+/*   Updated: 2022/07/08 15:17:11 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	free_all(t_all *all)
 		if (all->data->draw)
 			free(all->data->draw);
 	}
+	free(all->data);
 	free(all);
 	exit(0);
 }

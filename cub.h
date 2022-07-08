@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:04:56 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 13:06:03 by mkoch            ###   ########.fr       */
+/*   Updated: 2022/07/08 15:17:04 by jerrok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			check_map(t_all *all, char **map);
 void			error(t_all *all, char *where);
 void			get_struct_textures(t_all *all, char **tex_raw, t_tex *tex);
 
-char			**get_only_map(t_all *all, char **map_raw);
+void			get_only_map(t_all *all, char **map_raw);
 char			**get_textures(t_all *all, char **map_raw);
 char			**get_map(char *map_file);
 
