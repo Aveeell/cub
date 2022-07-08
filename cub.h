@@ -83,7 +83,7 @@ char			**get_map(char *map_file);
 
 int				check_split(char const *s, char c);
 
-void			fill_lvl_stuct(t_all *all, t_tex *tex, t_data *data);
+void			fill_data_stuct(t_all *all, t_tex *tex, t_data *data);
 t_all			*init_all(void);
 void			free_all(t_all *all);
 

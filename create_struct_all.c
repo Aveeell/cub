@@ -15,7 +15,7 @@ static int	get_color(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	fill_lvl_stuct(t_all *all, t_tex *tex, t_data *data)
+void	fill_data_stuct(t_all *all, t_tex *tex, t_data *data)
 {
 	int	w;
 	int	h;
@@ -31,7 +31,7 @@ void	fill_lvl_stuct(t_all *all, t_tex *tex, t_data *data)
 											&w, &h);
 	data->fl = get_color(0, tex->fl_rgb[0], tex->fl_rgb[1], tex->fl_rgb[2]);
 	data->ceil = get_color(0, tex->cl_rgb[0], tex->cl_rgb[1], tex->cl_rgb[2]);
-	if (!data->no || !data->so || !data->we || !data->ea)
+	if (!data->no->img || !data->so->img || !data->we->img || !data->ea->img)
 		error(all, "can't open file with textures");
 	data->no->addr = mlx_get_data_addr(data->no->img,
 			&data->no->bpp, &data->no->l_len, &data->no->end);

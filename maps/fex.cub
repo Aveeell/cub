@@ -1,19 +1,19 @@
-              NO           xpm/blue_wall.xpm
+              NO           xpm/n.xpm
 
 
 
           F                      255,0,0
 
 
-SO  xpm/red_wall.xpm
+SO  xpm/s.xpm
 
 
 
-WE xpm/green_wall.xpm           
+WE                                                        xpm/w.xpm           
 
 
 
-EA                               xpm/yellow_wall.xpm
+EA                               xpm/e.xpm
 
 
 C 225,0,0
