@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_column.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 13:04:58 by mkoch             #+#    #+#             */
+/*   Updated: 2022/07/08 13:04:59 by mkoch            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 unsigned int	get_pixel(t_data *data, unsigned x, unsigned y)
@@ -20,7 +32,7 @@ long double	get_delta(t_data *data, long double x, long double y)
 	y = y / data->scale;
 	if (data->map[(int)(y)][(int)(x + 0.001)] != '1')
 	{
-		data->cur_wall = data->we;
+		data->cur_wall = data->ea;
 		return (((long double)(int)y + 1.0) - y);
 	}
 	if (data->map[(int)(y + 0.001)][(int)(x)] != '1')
@@ -30,7 +42,7 @@ long double	get_delta(t_data *data, long double x, long double y)
 	}
 	if (data->map[(int)(y)][(int)(x - 0.001)] != '1')
 	{
-		data->cur_wall = data->ea;
+		data->cur_wall = data->we;
 		return (y - (long double)(int)y);
 	}
 	if (data->map[(int)(y - 0.001)][(int)(x)] != '1')

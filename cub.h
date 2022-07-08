@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/08 13:04:56 by mkoch             #+#    #+#             */
+/*   Updated: 2022/07/08 13:06:03 by mkoch            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 # define CUB_H
 
@@ -51,6 +63,9 @@ typedef struct s_data {
 	int			fl;
 	int			ceil;
 	long double	len;
+	int			x_mouse_now;
+	int			x_mouse_before;
+	int			toogle_mouse;
 	t_img		*no;
 	t_img		*so;
 	t_img		*ea;
@@ -111,5 +126,9 @@ void			run_game(t_data *data, t_all *all);
 void			ft_put_pixel(t_data *data, float i, float j, int color);
 void			ft_draw_player(t_data *data, float i, float j, int color);
 void			ft_draw_minimap(t_data *data);
+void			rot_left_m(t_data *data);
+void			rot_right_m(t_data *data);
+int				mouse_toogle(int keycode, int x, int y, t_data *data);
+int				mouse_move(int x, int y, t_data *data);
 
 #endif
