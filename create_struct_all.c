@@ -56,11 +56,11 @@ t_all	*init_all(void)
 	all->data->we = malloc(sizeof(t_img));
 	all->data->ea = malloc(sizeof(t_img));
 	all->data->draw = malloc(sizeof(t_img));
-	all->data->scale = 64;
 	all->data->win_w = 848;
 	all->data->win_h = 480;
-	all->data->step = 10;
+	all->data->scale = 64;
 	all->data->turn = 0.1;
+	all->data->step = 10;
 	all->tex->no = 0;
 	all->tex->so = 0;
 	all->tex->we = 0;

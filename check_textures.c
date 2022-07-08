@@ -63,7 +63,7 @@ static void	write_tex_into_struct(char *str, t_all *all, t_tex *tex)
 	}
 }
 
-void	get_struct(t_all *all, char **tex_raw, t_tex *tex)
+void	get_struct_textures(t_all *all, char **tex_raw, t_tex *tex)
 {
 	int		i;
 	char	*str;

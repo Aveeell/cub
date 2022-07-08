@@ -75,7 +75,7 @@ int				ft_atoi(const char *str);
 
 void			check_map(t_all *all, char **map);
 void			error(t_all *all, char *where);
-void			get_struct(t_all *all, char **tex_raw, t_tex *tex);
+void			get_struct_textures(t_all *all, char **tex_raw, t_tex *tex);
 
 char			**get_only_map(t_all *all, char **map_raw);
 char			**get_textures(t_all *all, char **map_raw);

@@ -8,7 +8,7 @@ SRCS =	main.c \
 		check_wall.c \
 		check_textures.c \
 		free_and_error.c \
-		get_pos_on_map.c \
+		get_map_position.c \
 		create_struct_all.c \
 		get_data_from_file.c \
 		check_spaces_n_zeros.c \
@@ -19,10 +19,10 @@ SRCS =	main.c \
 		gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
 		move.c \
+		minimap.c \
 		cast_ray.c \
 		draw_column.c \
 		hook_and_render.c \
-		minimap.c
 		
 
 OBJ := $(SRCS:%.c=%.o)

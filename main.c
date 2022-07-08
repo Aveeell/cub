@@ -8,7 +8,7 @@ static void	get_all_struct(char *argv, t_all *all)
 	all->data->map = get_only_map(all, all->raw->map_raw);
 	check_map(all, all->data->map);
 	all->raw->tex_raw = get_textures(all, all->raw->map_raw);
-	get_struct(all, all->raw->tex_raw, all->tex);
+	get_struct_textures(all, all->raw->tex_raw, all->tex);
 	fill_data_stuct(all, all->tex, all->data);
 }
 
