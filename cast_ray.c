@@ -4,8 +4,8 @@ void	ft_one_ray(t_data *data, float pov_tmp, int j)
 {
 	long double	x;
 	long double	y;
-	float	pov_tmp_sin;
-	float	pov_tmp_cos;
+	float		pov_tmp_sin;
+	float		pov_tmp_cos;
 
 	x = data->pl_x;
 	y = data->pl_y;

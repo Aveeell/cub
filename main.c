@@ -14,18 +14,17 @@ static void	get_all_struct(char *argv, t_all *all)
 
 void	run_game(t_data *data, t_all *all)
 {
-	(void)all;
+	int	k;
+
+	k = 0;
 	ft_find_player(data);
 	data->draw->img = mlx_new_image(data->mlx, data->win_w, data->win_h);
 	data->draw->addr = mlx_get_data_addr(data->draw->img, &data->draw->bpp, \
 										&data->draw->l_len, &data->draw->end);
 	data->win = mlx_new_window(data->mlx, data->win_w, data->win_h, "cub3d");
 	// ft_draw_ray(data);
-
-	int k = 0;
 	while (data->map[k])
 		k++;
-
 	data->scale_minimap = (int)(0.3 * data->win_h / k);
 	mlx_hook(data->win, 17, 0, exit_hook, all);
 	mlx_hook(data->win, 2, 0, key_hook, all);

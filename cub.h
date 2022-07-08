@@ -36,28 +36,28 @@ typedef struct s_img {
 }				t_img;
 
 typedef struct s_data {
-	char	**map;
-	void	*mlx;
-	void	*win;
-	int		step;
-	float	turn;
-	float	pl_x;
-	float	pl_y;
-	float	pl_pov;
-	int		scale;
-	int		scale_minimap;
-	int		win_w;
-	int		win_h;
-	int		fl;
-	int		ceil;
+	char		**map;
+	void		*mlx;
+	void		*win;
+	int			step;
+	float		turn;
+	float		pl_x;
+	float		pl_y;
+	float		pl_pov;
+	int			scale;
+	int			scale_minimap;
+	int			win_w;
+	int			win_h;
+	int			fl;
+	int			ceil;
 	long double	len;
-	t_img	*no;
-	t_img	*so;
-	t_img	*ea;
-	t_img	*we;
-	t_img	*draw;
-	t_img	*cur_wall;
-}	t_data;
+	t_img		*no;
+	t_img		*so;
+	t_img		*ea;
+	t_img		*we;
+	t_img		*draw;
+	t_img		*cur_wall;
+}				t_data;
 
 typedef struct s_all
 {

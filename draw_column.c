@@ -60,7 +60,7 @@ void	draw_column(t_data *data, int j, long double x, long double y)
 	long double	start;
 	long double	finish;
 	long double	col_h;
-	long double		delta_y;
+	long double	delta_y;
 
 	i = 0;
 	get_values(data, &start, &finish, &col_h);
