@@ -6,7 +6,7 @@
 /*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:05:24 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 13:05:25 by mkoch            ###   ########.fr       */
+/*   Updated: 2022/07/08 15:59:18 by mkoch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	rot_left_m(t_data *data)
 	i = 0;
 	while (i < 5)
 	{
-		data->pl_pov -= data->turn / 5;
+		data->pl_pov -= data->turn / 10;
 		if (data->pl_pov > (-1) * M_PI * 2)
 			data->pl_pov = data->pl_pov + 2 * M_PI;
 		i++;
@@ -33,7 +33,7 @@ void	rot_right_m(t_data *data)
 	i = 0;
 	while (i < 5)
 	{
-		data->pl_pov += data->turn / 5;
+		data->pl_pov += data->turn / 10;
 		if (data->pl_pov > M_PI * 2)
 			data->pl_pov = data->pl_pov - 2 * M_PI;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:04:41 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 13:04:42 by mkoch            ###   ########.fr       */
+/*   Updated: 2022/07/08 16:01:21 by mkoch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	check_walls_around_space(t_all *all, char **map)
 					map[i + 1][j] != '1')) || \
 					(!is_full_space(map[i]) && j < ft_strlen(map[i]) && \
 					(map[i][j + 1] != ' ' && map[i][j + 1] != '1')))
-					error(all, "check_walls_arond_space");
+					error(all, 0);
 			}
 			j++;
 		}
@@ -74,7 +74,7 @@ void	check_all_zeros(t_all *all, char **map)
 					(map[i + 1][j + 1] == ' ' || !map[i + 1][j + 1]) ||
 					(map[i - 1][j + 1] == ' ' || !map[i - 1][j + 1]) ||
 					(map[i - 1][j - 1] == ' ' || !map[i - 1][j - 1]))
-					error(all, "check_zeros");
+					error(all, 0);
 			j++;
 		}
 		i++;

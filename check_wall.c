@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:04:51 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 15:16:52 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/07/08 16:01:56 by mkoch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_with_prev_string(t_all *all, char **map, int i)
 		if (j > k)
 		{
 			if (map[i][k] != '1')
-				error(all, "no wall bottom last symbol from prev string");
+				error(all, 0);
 			while (j > k)
 			{
 				if (map[i][j] != ' ' && map[i][j] != '1')
@@ -32,7 +32,7 @@ void	check_with_prev_string(t_all *all, char **map, int i)
 				j--;
 			}
 			if (j != k)
-				error(all, "check_with_prev");
+				error(all, 0);
 		}
 	}
 }
@@ -51,7 +51,7 @@ void	check_wall_around_map(t_all *all, char **map)
 		if (ft_strlen(str) && (str[0] != '1' || str[ft_strlen(str) - 1] != '1'))
 		{
 			free(str);
-			error(all, "check_wall_around | first\\last wall");
+			error(all, 0);
 		}
 		free(str);
 		if (ft_strlen(str))
@@ -74,7 +74,7 @@ void	check_up_n_down(t_all *all, char **map)
 			while (map[i][j])
 			{
 				if (map[i][j] != ' ' && map[i][j] != '1')
-					error(all, "up_n_down");
+					error(all, 0);
 				j++;
 			}
 		}
@@ -103,7 +103,7 @@ void	check_player(t_all *all, char **map)
 		i++;
 	}
 	if (flag != 1)
-		error(all, "check_player");
+		error(all, 0);
 }
 
 void	check_map(t_all *all, char **map)

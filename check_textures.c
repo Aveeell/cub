@@ -6,7 +6,7 @@
 /*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:04:44 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 13:04:45 by mkoch            ###   ########.fr       */
+/*   Updated: 2022/07/08 16:01:40 by mkoch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_struct(t_all *all, char *str)
 {
 	if (str)
-		error(all, "check_tex_in_struct");
+		error(all, 0);
 	return (1);
 }
 
@@ -23,7 +23,7 @@ static void	check_value_of_color(int j, int *arr, t_all *all)
 {
 	while (j--)
 		if (arr[j] > 255 || arr[j] < 0)
-			error(all, "check_color out of range");
+			error(all, 0);
 }
 
 static void	check_color(t_all *all, char *str, int *arr)
@@ -38,7 +38,7 @@ static void	check_color(t_all *all, char *str, int *arr)
 		while (str[i] == ' ')
 			i++;
 		if (str[i] < '0' || str[i] > '9')
-			error(all, "check_color");
+			error(all, 0);
 		else
 		{
 			arr[j] = ft_atoi(&str[i]);
@@ -50,7 +50,7 @@ static void	check_color(t_all *all, char *str, int *arr)
 		j++;
 	}
 	if (j != 3 || str[ft_strlen(str) - 1] == ',')
-		error(all, "wrong value of rgb");
+		error(all, 0);
 	check_value_of_color(j, arr, all);
 }
 
@@ -71,7 +71,7 @@ static void	write_tex_into_struct(char *str, t_all *all, t_tex *tex)
 	else
 	{
 		free(str);
-		error(all, "get_struct wrong symbol");
+		error(all, 0);
 	}
 }
 
@@ -90,7 +90,7 @@ void	get_struct_textures(t_all *all, char **tex_raw, t_tex *tex)
 	}
 	if (!tex->no || !tex->so || !tex->we || !tex->ea || !tex->fl || \
 		!tex->ceil)
-		error(all, "get_struct no textures");
+		error(all, 0);
 	check_color(all, tex->fl, tex->fl_rgb);
 	check_color(all, tex->ceil, tex->cl_rgb);
 }

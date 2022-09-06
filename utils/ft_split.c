@@ -6,7 +6,7 @@
 /*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:07:15 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 13:07:16 by mkoch            ###   ########.fr       */
+/*   Updated: 2022/07/08 16:04:35 by mkoch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_count_word(char *s, char c, int flag)
 			if (s[i] == c && s[i + 1] == c)
 			{
 				free(s);
-				error(0, "split | newline in map");
+				error(0, 0);
 			}
 		}
 		i++;

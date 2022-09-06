@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_and_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:05:01 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 15:17:11 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/07/08 16:00:45 by mkoch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ void	free_all(t_all *all)
 
 void	error(t_all *all, char *where)
 {
-	printf("error: %s\n", where);
+	printf("error");
+	if (where)
+		printf(": %s\n", where);
 	if (all)
 		free_all(all);
 	exit(0);

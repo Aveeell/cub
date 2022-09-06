@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:05:15 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 15:17:25 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/07/08 16:02:27 by mkoch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	get_all_struct(char *argv, t_all *all)
 {
 	all->raw->map_raw = get_map(argv);
 	if (!all->raw->map_raw)
-		error(0, "can't open file");
+		error(0, 0);
 	get_only_map(all, all->raw->map_raw);
 	check_map(all, all->data->map);
 	all->raw->tex_raw = get_textures(all, all->raw->map_raw);

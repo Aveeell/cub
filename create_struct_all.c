@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_struct_all.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerrok <jerrok@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mkoch <mkoch@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 13:04:54 by mkoch             #+#    #+#             */
-/*   Updated: 2022/07/08 15:16:58 by jerrok           ###   ########.fr       */
+/*   Updated: 2022/07/08 16:03:57 by mkoch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	fill_data_stuct(t_all *all, t_tex *tex, t_data *data)
 	data->fl = get_color(0, tex->fl_rgb[0], tex->fl_rgb[1], tex->fl_rgb[2]);
 	data->ceil = get_color(0, tex->cl_rgb[0], tex->cl_rgb[1], tex->cl_rgb[2]);
 	if (!data->no->img || !data->so->img || !data->we->img || !data->ea->img)
-		error(all, "can't open file with textures");
+		error(all, 0);
 	data->no->addr = mlx_get_data_addr(data->no->img,
 			&data->no->bpp, &data->no->l_len, &data->no->end);
 	data->ea->addr = mlx_get_data_addr(data->ea->img,
@@ -73,7 +73,6 @@ t_all	*init_all(void)
 	all->data->scale = 64;
 	all->data->turn = 0.1;
 	all->data->step = 10;
-	all->data->map = 0;
 	all->tex->no = 0;
 	all->tex->so = 0;
 	all->tex->we = 0;
